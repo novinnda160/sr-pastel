@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sr. Pastel - Cardápio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Resetando margens e padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Corpo da página */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #111;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        header img {
+            width: 120px; /* Tamanho da logo */
+        }
+
+        /* Estilos do menu hambúrguer */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle div {
+            width: 35px;
+            height: 5px;
+            background-color: #fff;
+            margin: 6px 0;
+            transition: 0.3s;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Menu hambúrguer em dispositivos móveis */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                text-align: center;
+                width: 100%;
+                background-color: #111;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                padding: 10px 0;
+            }
+            nav ul li {
+                display: block;
+                margin: 15px 0;
+            }
+            nav ul li a {
+                font-size: 20px;
+            }
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            .menu-toggle.open div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .menu-toggle.open div:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            nav ul.open {
+                display: block;
+            }
+        }
+
+        /* Banner */
+        .banner {
+            background-image: url('/img/Inserir\ um\ título.png');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            text-align: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner h1 {
+            font-size: 48px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Estilo dos cards */
+        .cardapio {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 50px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+        .card-body {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Garante que o conteúdo não se sobreponha */
+    height: 300px; /* Ajusta a altura do card para comportar todos os elementos */
+}
+
+.card h3 {
+    font-size: 22px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.card p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px; /* Espaçamento adicional para garantir que o botão não sobreponha */
+}
+
+.whatsapp-button {
+    background-color: #25D366;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: auto; /* Garante que o botão fique no final */
+}
+
+.whatsapp-button:hover {
+    background-color: #08ea1b;
+}
+
+        footer {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .cta {
+            background-color: #FF7F50;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+
+        .cta button {
+            background-color: #fff;
+            color: #FF7F50;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cta button:hover {
+            background-color: #FF6347;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="/img/Captura de tela 2024-12-17 065606.png" alt="Logo Sr. Pastel"> <!-- Insira a imagem da sua logo aqui -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="30cm.html">Pasteis 30cm</a></li>
+            <li><a href="srb.html">SR Bacon e SR Calabresa</a></li>
+            <li><a href="massasca.html">Massas Caseiras</a></li>
+            <li><a href="batataf.html">Batata Fritas</a></li>
+            <li><a href="combi2.html">Combinados 2</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="banner">
+    <h1>O Melhor Pastel da Cidade</h1>
+</div>
+
+<div class="cardapio">
+    <!-- Card 1 -->
+    <div class="card">
+        <img src="img/pernil supre.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>Pernil  Supreme</h3>
+            <p>o Pernil Supreme, um pastel irresistível com pernil desfiado e suculento, bacon crocante e queijo derretido</p>
+            <div class="price">R$ 22,90</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/supreme.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>Frango Supreme</h3>
+            <p>do Frango Supreme! Recheado com frango desfiado e temperado na medida certa,Pizza e Requeijão (cremoso) , esse pastel oferece uma explosão de sabores em cada mordida</p>
+            <div class="price">R$ 22,90</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="/img/pizza supre.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>Pizza Supreme</h3>
+            <p>Pizza Supreme, um pastel que traz a deliciosa combinação de queijo, presunto, orégano, cheddar e bacon. </p>
+            <div class="price">R$ 23,90</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/qj supre.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>Queijo Supreme</h3>
+            <p>o Queijo Supreme, um pastel que eleva o conceito de sabor! Recheado com uma combinação irresistível de queijos variados—Catupiry cremoso, cheddar intenso, queijo derretido—e finalizado com queijo provolone e orégano! </p>
+            <div class="price">R$ 22,90</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="/img/sr supreme.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>SR Supreme</h3>
+            <p>o Sr.Supreme: o pastel que combina tudo o que há de melhor em um só lugar! Recheado com carne suculenta, pernil desfiado, frango temperado, queijo derretido e pizza.</p>
+            <div class="price">R$ 29,90</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="/img/combo sp.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>Combo Supreme</h3>
+            <p> Inclui 2 pastéis de 30 cm, com 3 sabores diferentes e deliciosos, além de um toque extra de cremosidade com nossa maionese temperada exclusiva. E, claro, para completar o pedido, 2 Coca-Cola Mini bem geladinhas. Uma explosão de sabores em cada mordida!</p>
+            <div class="price">R$ 72,05</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="/img/choco com q.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>Chocolate Com Queijo</h3>
+            <p> o doce e o salgado! Nosso pastel de 20 cm vem recheado com chocolate derretido e queijo cremoso, criando uma explosão de sabores surpreendente e irresistível.</p>
+            <div class="price">R$ 16,90</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="/img/choco.avif" alt="Frango Supreme">
+        <div class="card-body">
+            <h3>Chocolate</h3>
+            <p>O pastel de chocolate com banana do Sr Pastel é uma combinação perfeita de sabores. Com uma massa crocante e dourada, ele é recheado com chocolate cremoso e fatias de banana, criando uma mistura deliciosa de doce e frutado. Servido no tamanho de 20 centímetros,</p>
+            <div class="price">R$ 16,90</div>
+            <a href="https://wa.me/+55 32 9834-4067?text=Gostaria%20de%20fazer%20um%20pedido%20de%20Frango%20Supreme." class="whatsapp-button">Pedir no WhatsApp</a>
+        </div>
+    </div>
+    
+   
+    <!-- Adicione os outros cards aqui... -->
+</div>
+
+<div class="cta">
+<h2>Veja Os Demais No Menu</h2>
+</div>
+
+<footer>
+    <p>&copy; 2024 Sr. Pastel | <a href="#">Política de Privacidade</a></p>
+    <p>Nos siga no <a href="https://www.instagram.com/sr.pastel">Instagram</a></p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        const toggle = document.querySelector(".menu-toggle");
+        menu.classList.toggle("open");
+        toggle.classList.toggle("open");
+    }
+</script>
+
+</body>
+</html>
